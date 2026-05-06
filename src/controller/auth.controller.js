@@ -1,7 +1,7 @@
 const { JsonWebTokenError } = require("jsonwebtoken");
 const userModel = require("../module/user.module")
 const jwt = require("JsonWebToken")
-
+const emailServices = require("../services/email.service")
 
 /** 
 * - user register controller
@@ -36,6 +36,8 @@ async function userRegisterController(req,res){
         },
         token
     })
+    await emailServices.sendRegistrationEmail(user.email,user.name)
+
 }
 
 /**
